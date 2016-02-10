@@ -39,7 +39,7 @@ else(BITS EQUAL 64)
 	set(zlib_sources ${zlib_sources} contrib/asm686/match.S)
 endif(BITS EQUAL 64)
 
-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib${SUFFIX}/darling")
+SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/darling")
 SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE) 
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
@@ -47,4 +47,4 @@ add_library(z SHARED ${zlib_sources})
 target_link_libraries(z system)
 set_target_properties(z PROPERTIES LINKER_LANGUAGE C)
 
-install(TARGETS z DESTINATION lib${SUFFIX}/darling)
+install(TARGETS z DESTINATION ${CMAKE_INSTALL_LIBDIR}/darling)
