@@ -45,3 +45,5 @@ target_link_libraries(z system)
 set_target_properties(z PROPERTIES LINKER_LANGUAGE C OUTPUT_NAME "z.1")
 
 install(TARGETS z DESTINATION libexec/darling/usr/lib)
+InstallSymlink("libz.1.dylib" "${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/lib/libz.dylib")
+
