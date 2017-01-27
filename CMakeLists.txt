@@ -33,14 +33,14 @@ set(zlib_sources
 	zutil.c
 )
 
-if (BITS EQUAL 64)
-	set(zlib_sources ${zlib_sources} contrib/amd64/amd64-match.S)
-else(BITS EQUAL 64)
-	set(zlib_sources ${zlib_sources} contrib/asm686/match.S)
-endif(BITS EQUAL 64)
+add_library(z64 OBJECT contrib/amd64/amd64-match.S)
+set_target_properties(z64 PROPERTIES COMPILE_FLAGS "-arch x86_64")
+add_library(z32 OBJECT contrib/asm686/match.S)
+set_target_properties(z32 PROPERTIES COMPILE_FLAGS "-arch i386")
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libz.1.dylib")
-add_darling_library(z SHARED ${zlib_sources})
+add_darling_library(z SHARED ${zlib_sources} $<TARGET_OBJECTS:z64> $<TARGET_OBJECTS:z32>)
+make_fat(z)
 target_link_libraries(z system)
 set_target_properties(z PROPERTIES LINKER_LANGUAGE C OUTPUT_NAME "z.1")
 
