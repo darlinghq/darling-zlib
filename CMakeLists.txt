@@ -39,6 +39,9 @@ add_library(z32 OBJECT contrib/asm686/match.S)
 set_target_properties(z32 PROPERTIES COMPILE_FLAGS "-arch i386")
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libz.1.dylib")
+set(DYLIB_COMPAT_VERSION "1.0.0")
+set(DYLIB_CURRENT_VERSION "1.0.0")
+
 add_darling_library(z SHARED ${zlib_sources} $<TARGET_OBJECTS:z64> $<TARGET_OBJECTS:z32>)
 make_fat(z)
 target_link_libraries(z system)
