@@ -33,10 +33,19 @@ set(zlib_sources
 	zutil.c
 )
 
-add_library(z64 OBJECT contrib/amd64/amd64-match.S)
-set_target_properties(z64 PROPERTIES COMPILE_FLAGS "-arch x86_64")
-add_library(z32 OBJECT contrib/asm686/match.S)
-set_target_properties(z32 PROPERTIES COMPILE_FLAGS "-arch i386")
+if (TARGET_x86_64)
+	add_darling_object_library(z64 contrib/amd64/amd64-match.S)
+	set_target_properties(z64 PROPERTIES COMPILE_FLAGS "-arch x86_64")
+else (TARGET_x86_64)
+	add_darling_object_library(z64 empty.c)
+endif (TARGET_x86_64)
+
+if (TARGET_i386)
+	add_darling_object_library(z32 contrib/asm686/match.S)
+	set_target_properties(z32 PROPERTIES COMPILE_FLAGS "-arch i386")
+else (TARGET_i386)
+	add_darling_object_library(z32 empty.c)
+endif (TARGET_i386)
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libz.1.dylib")
 set(DYLIB_COMPAT_VERSION "1.0.0")
