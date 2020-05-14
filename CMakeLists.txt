@@ -12,7 +12,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__DARWIN_UNIX03 -fPIC -w")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -nostdlib")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/)
-include_directories(${DARLING_TOP_DIRECTORY}/platform-include)
 add_definitions(-D_LARGEFILE64_SOURCE=1 -DZ_HAVE_UNISTD_H -DASMV)
 
 set(zlib_sources
