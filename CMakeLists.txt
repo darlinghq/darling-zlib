@@ -13,7 +13,11 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -nostdlib")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/)
 include_directories(${DARLING_TOP_DIRECTORY}/platform-include)
-add_definitions(-D_LARGEFILE64_SOURCE=1 -DZ_HAVE_UNISTD_H -DASMV)
+add_definitions(-D_LARGEFILE64_SOURCE=1 -DZ_HAVE_UNISTD_H)
+
+if (TARGET_x86_64 OR TARGET_i386)
+	add_definitions(-DASMV)
+endif (TARGET_x86_64 OR TARGET_i386)
 
 set(zlib_sources
 	adler32.c
